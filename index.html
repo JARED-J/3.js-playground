@@ -4,34 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <link rel="stylesheet" type="text/css" href="index.css"/>
     <title>Document</title>
 </head>
 <body>
+    <!-- three.js minified file from local directory-->
     <script src="js/three.js"></script>
-
-
     <script>
-        let scene = new THREE.scene();
-        let camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, );
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, );
 
-        let renderer = new THREE.WebGLRenderer( );
+        var renderer = new THREE.WebGLRenderer( );
         renderer.setSize( window.innerWidth, window.innerHeight);
         document.body.appendChild( renderer.domElement );
 
+        // create the shape
+        var geometry = new THREE.BoxGeometry( 1, 1, 1);
+        
+        // create a material, color or image texture
+        var material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF, wireframe: false  } );
+        var cube = new THREE.Mesh( geometry, material );
+        scene.add( cube );
+
+        camera.position.z = 3;
+
         // game logic
-        let update = function() {
+        var update = function() {
 
         };
 
         // draw scene
-        let render = function() {
+        var render = function() {
             renderer.render(scene, camera);
         };
 
         // run game loop (update, render, repeat)
-        let GameLoop = function(){
+        var GameLoop = function(){
             requestAnimationFrame(GameLoop);
             update();
             render();
